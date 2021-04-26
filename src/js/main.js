@@ -1,10 +1,14 @@
- import modals from './modules/modals';
+import modals from './modules/modals';
+import sliders from './modules/sliders';
 
- window.addEventListener('DOMContentLoaded', () => {
-   'use stict';
+window.addEventListener('DOMContentLoaded', () => {
+  'use stict';
 
-    modals();
+  modals();
+  sliders('.main-slider-item', 'vertical', '', '');
+  sliders('.feedback-slider-item', '', '.main-prev-btn', '.main-next-btn');
 
 
- });
+
+});
 
