@@ -954,6 +954,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var modals = function modals() {
+  var btnPressed = false;
+
   function calcScroll() {
     // вычисление ширины скрола
     var div = document.createElement('div');
@@ -980,7 +982,7 @@ var modals = function modals() {
   }
 
   function bindModal(triggerSelector, modalSelector, closeSelector) {
-    var closeClickOverlay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+    var destroyTrigger = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
     var trigger = document.querySelectorAll(triggerSelector),
         modal = document.querySelector(modalSelector),
         close = document.querySelector(closeSelector),
@@ -991,8 +993,15 @@ var modals = function modals() {
           evt.preventDefault();
         }
 
+        btnPressed = true;
+
+        if (destroyTrigger) {
+          item.remove();
+        }
+
         windows.forEach(function (item) {
           item.style.display = 'none';
+          item.classList.add('animated', 'fadeIn');
         });
         modalOpen(modalSelector);
       });
@@ -1004,7 +1013,7 @@ var modals = function modals() {
       modalClose(modalSelector);
     });
     modal.addEventListener('click', function (evt) {
-      if (evt.target === modal && closeClickOverlay) {
+      if (evt.target === modal) {
         windows.forEach(function (item) {
           item.style.display = 'none';
         });
@@ -1028,8 +1037,18 @@ var modals = function modals() {
     }, time);
   }
 
+  function openByScroll(selector) {
+    window.addEventListener('scroll', function () {
+      if (!btnPressed && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+        document.querySelector(selector).click();
+      }
+    });
+  }
+
   bindModal('.button-design', '.popup-design', '.popup-design .popup-close');
   bindModal('.button-consultation', '.popup-consultation', '.popup-consultation .popup-close');
+  bindModal('.fixed-gift', '.popup-gift', '.popup-gift .popup-close', true);
+  openByScroll('.fixed-gift');
   showModalByTime('.popup-consultation', 60000);
 };
 
