@@ -4351,6 +4351,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/checkTextInputs */ "./src/js/modules/checkTextInputs.js");
 /* harmony import */ var _modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/showMoreStyles */ "./src/js/modules/showMoreStyles.js");
 /* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./modules/calc */ "./src/js/modules/calc.js");
+/* harmony import */ var _modules_filter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/filter */ "./src/js/modules/filter.js");
+
 
 
 
@@ -4370,6 +4372,7 @@ window.addEventListener('DOMContentLoaded', function () {
   Object(_modules_checkTextInputs__WEBPACK_IMPORTED_MODULE_4__["default"])('[name="message"]');
   Object(_modules_showMoreStyles__WEBPACK_IMPORTED_MODULE_5__["default"])('.button-styles', '#styles .row');
   Object(_modules_calc__WEBPACK_IMPORTED_MODULE_6__["default"])('#size', '#material', '#options', '.promocode', '.calc-price');
+  Object(_modules_filter__WEBPACK_IMPORTED_MODULE_7__["default"])();
 });
 
 /***/ }),
@@ -4448,6 +4451,95 @@ var checkTextInputs = function checkTextInputs(selector) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (checkTextInputs);
+
+/***/ }),
+
+/***/ "./src/js/modules/filter.js":
+/*!**********************************!*\
+  !*** ./src/js/modules/filter.js ***!
+  \**********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var filter = function filter() {
+  var menu = document.querySelector('.portfolio-menu'),
+      items = menu.querySelectorAll('li'),
+      btnAll = document.querySelector('.all'),
+      btnLover = document.querySelector('.lovers'),
+      btnChef = document.querySelector('.chef'),
+      btnGirl = document.querySelector('.girl'),
+      btnGuy = document.querySelector('.guy'),
+      btnGM = document.querySelector('.grandmother'),
+      btnGF = document.querySelector('.granddad'),
+      wrapper = document.querySelector('.portfolio-wrapper'),
+      markAll = wrapper.querySelectorAll('.all'),
+      markLovers = wrapper.querySelectorAll('.lovers'),
+      markChef = wrapper.querySelectorAll('.chef'),
+      markGirl = wrapper.querySelectorAll('.girl'),
+      markGuy = wrapper.querySelectorAll('.guy'),
+      markGM = wrapper.querySelectorAll('.grandmother'),
+      markGF = wrapper.querySelectorAll('.granddad'),
+      no = document.querySelector('.portfolio-no');
+
+  var typeFilter = function typeFilter(markType) {
+    markAll.forEach(function (item) {
+      item.style.display = 'none';
+      item.classList.remove('animated', 'fadeIn');
+    });
+    no.style.display = 'none';
+    no.classList.remove('animated', 'fadeIn');
+
+    if (markType) {
+      markType.forEach(function (item) {
+        item.style.display = 'block';
+        item.classList.add('animated', 'fadeIn');
+      });
+    } else {
+      no.style.display = 'block';
+      no.classList.add('animated', 'fadeIn');
+    }
+  };
+
+  btnAll.addEventListener('click', function () {
+    typeFilter(markAll);
+  });
+  btnLover.addEventListener('click', function () {
+    typeFilter(markLovers);
+  });
+  btnChef.addEventListener('click', function () {
+    typeFilter(markChef);
+  });
+  btnGirl.addEventListener('click', function () {
+    typeFilter(markGirl);
+  });
+  btnGuy.addEventListener('click', function () {
+    typeFilter(markGuy);
+  });
+  btnGM.addEventListener('click', function () {
+    typeFilter();
+  });
+  btnGF.addEventListener('click', function () {
+    typeFilter();
+  });
+  menu.addEventListener('click', function (evt) {
+    var target = evt.target;
+
+    if (target && target.tagName == 'LI') {
+      items.forEach(function (btn) {
+        return btn.classList.remove('active');
+      });
+      target.classList.add('active');
+    }
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (filter);
 
 /***/ }),
 
