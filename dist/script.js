@@ -4204,7 +4204,6 @@ var checkTextInputs = function checkTextInputs(selector) {
       }
     });
     item.addEventListener('input', function () {
-      // item.value.replace(/[^а-яё 0-9]/ig/, '');
       console.log(item.value);
       item.value = item.value.replace(/[^а-яё 0-9]/ig, '');
     });
