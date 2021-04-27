@@ -4463,32 +4463,58 @@ var checkTextInputs = function checkTextInputs(selector) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
 
+
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 var filter = function filter() {
   var menu = document.querySelector('.portfolio-menu'),
       items = menu.querySelectorAll('li'),
-      btnAll = document.querySelector('.all'),
-      btnLover = document.querySelector('.lovers'),
-      btnChef = document.querySelector('.chef'),
-      btnGirl = document.querySelector('.girl'),
-      btnGuy = document.querySelector('.guy'),
-      btnGM = document.querySelector('.grandmother'),
-      btnGF = document.querySelector('.granddad'),
       wrapper = document.querySelector('.portfolio-wrapper'),
-      markAll = wrapper.querySelectorAll('.all'),
-      markLovers = wrapper.querySelectorAll('.lovers'),
-      markChef = wrapper.querySelectorAll('.chef'),
-      markGirl = wrapper.querySelectorAll('.girl'),
-      markGuy = wrapper.querySelectorAll('.guy'),
-      markGM = wrapper.querySelectorAll('.grandmother'),
-      markGF = wrapper.querySelectorAll('.granddad'),
       no = document.querySelector('.portfolio-no');
 
+  var Filter =
+  /*#__PURE__*/
+  function () {
+    function Filter(name, noClass) {
+      _classCallCheck(this, Filter);
+
+      this.name = name;
+      this.noClass = noClass;
+    }
+
+    _createClass(Filter, [{
+      key: "btn",
+      value: function btn() {
+        return document.querySelector(this.name);
+      }
+    }, {
+      key: "mark",
+      value: function mark() {
+        if (this.noClass) {
+          return '';
+        } else {
+          return wrapper.querySelectorAll(this.name);
+        }
+      }
+    }]);
+
+    return Filter;
+  }();
+
+  var classArr = [new Filter('.all'), new Filter('.lovers'), new Filter('.chef'), new Filter('.girl'), new Filter('.guy'), new Filter('.grandmother', true), new Filter('.granddad', true)];
+
   var typeFilter = function typeFilter(markType) {
-    markAll.forEach(function (item) {
+    classArr[0].mark().forEach(function (item) {
       item.style.display = 'none';
       item.classList.remove('animated', 'fadeIn');
     });
@@ -4506,27 +4532,16 @@ var filter = function filter() {
     }
   };
 
-  btnAll.addEventListener('click', function () {
-    typeFilter(markAll);
-  });
-  btnLover.addEventListener('click', function () {
-    typeFilter(markLovers);
-  });
-  btnChef.addEventListener('click', function () {
-    typeFilter(markChef);
-  });
-  btnGirl.addEventListener('click', function () {
-    typeFilter(markGirl);
-  });
-  btnGuy.addEventListener('click', function () {
-    typeFilter(markGuy);
-  });
-  btnGM.addEventListener('click', function () {
-    typeFilter();
-  });
-  btnGF.addEventListener('click', function () {
-    typeFilter();
-  });
+  var _loop = function _loop(i) {
+    classArr[i].btn().addEventListener('click', function () {
+      typeFilter(classArr[i].mark());
+    });
+  };
+
+  for (var i = 0; i < classArr.length; i++) {
+    _loop(i);
+  }
+
   menu.addEventListener('click', function (evt) {
     var target = evt.target;
 
