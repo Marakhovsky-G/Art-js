@@ -90,7 +90,7 @@ const modals = () => {
 
   function openByScroll(selector) {
     window.addEventListener('scroll', () => {
-      if (!btnPressed && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight) {
+      if (!btnPressed && window.pageYOffset + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 100) {
         document.querySelector(selector).click();
       }
     });
