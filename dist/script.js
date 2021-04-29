@@ -4580,7 +4580,6 @@ var checkTextInputs = function checkTextInputs(selector) {
       }
     });
     item.addEventListener('input', function () {
-      console.log(item.value);
       item.value = item.value.replace(/[^а-яё 0-9]/ig, '');
     });
   });
@@ -4815,8 +4814,8 @@ var forms = function forms() {
     fail: 'assets/img/fail.png'
   };
   var path = {
-    designer: 'assets/server.php',
-    question: 'assets/question.php'
+    designer: './assets/server.php',
+    question: './assets/question.php'
   };
 
   var clearInputs = function clearInputs() {

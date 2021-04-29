@@ -10,7 +10,6 @@ const checkTextInputs = (selector) => {
     });
 
     item.addEventListener('input', () => {
-      console.log(item.value);
       item.value = item.value.replace(/[^а-яё 0-9]/ig, '');
     });
   });

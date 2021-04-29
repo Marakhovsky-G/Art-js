@@ -15,8 +15,8 @@ const forms = () => {
   };
 
   const path = {
-    designer: 'assets/server.php',
-    question: 'assets/question.php',
+    designer: './assets/server.php',
+    question: './assets/question.php',
   };
 
   const clearInputs = () => {
