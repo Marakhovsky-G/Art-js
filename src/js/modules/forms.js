@@ -13,10 +13,10 @@ const forms = () => {
     ok: 'assets/img/ok.png',
     fail: 'assets/img/fail.png',
   };
-
+  // ./assets/question.php
   const path = {
     designer: './assets/server.php',
-    question: './assets/question.php',
+    question: 'https://echo.htmlacademy.ru',
   };
 
   const clearInputs = () => {

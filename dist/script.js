@@ -4812,10 +4812,11 @@ var forms = function forms() {
     spinner: 'assets/img/spinner.gif',
     ok: 'assets/img/ok.png',
     fail: 'assets/img/fail.png'
-  };
+  }; // ./assets/question.php
+
   var path = {
     designer: './assets/server.php',
-    question: './assets/question.php'
+    question: 'https://echo.htmlacademy.ru'
   };
 
   var clearInputs = function clearInputs() {
@@ -5246,7 +5247,7 @@ var showMoreStyles = function showMoreStyles(trigger, wrapper) {
     }).then(function (result) {
       return createCards(result);
     }).catch(function (error) {
-      return console.log(error);
+      return errorAlert();
     });
     this.remove();
   });
@@ -5261,6 +5262,14 @@ var showMoreStyles = function showMoreStyles(trigger, wrapper) {
       card.innerHTML = "\n        <div class=styles-block>\n          <img src=".concat(src, " alt>\n          <h4>").concat(title, "</h4>\n          <a href=").concat(link, ">\u041F\u043E\u0434\u0440\u043E\u0431\u043D\u0435\u0435</a>\n        </div>\n      ");
       document.querySelector(wrapper).appendChild(card);
     });
+  }
+
+  function errorAlert() {
+    var alertMessage = document.createElement('div');
+    alertMessage.classList.add('p-heading');
+    alertMessage.style.margin = '0 0 165px 0';
+    alertMessage.textContent = 'Упс. Что то пошло не так.';
+    document.querySelector(wrapper).appendChild(alertMessage);
   }
 };
 

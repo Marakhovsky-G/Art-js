@@ -7,7 +7,7 @@ const showMoreStyles = (trigger, wrapper) => {
     getData('assets/Db.json')
       .then(result => result.styles)
       .then(result => createCards(result))
-      .catch(error => console.log(error));
+      .catch(error => errorAlert());
 
     this.remove();
   });
@@ -25,6 +25,14 @@ const showMoreStyles = (trigger, wrapper) => {
       `;
       document.querySelector(wrapper).appendChild(card);
     });
+  }
+
+  function errorAlert() {
+    let alertMessage = document.createElement('div');
+    alertMessage.classList.add('p-heading');
+    alertMessage.style.margin = '0 0 165px 0';
+    alertMessage.textContent = 'Упс. Что то пошло не так.';
+    document.querySelector(wrapper).appendChild(alertMessage);
   }
 };
 
