@@ -8,7 +8,18 @@ const calc = (size, material, options, promocode, result) => {
   let sum = 0;
 
   const calcFunc = () => {
-    sum = Math.round((+sizeBlock.value) * (+materialBlock.value) + (+optionsBlock.value));
+    function getPrice(elem) {
+      try {
+        return elem.value.match(/цена=\d{1,5}/gi).join().replace(/\D/gi, '');
+      } catch(err) {return 0;}
+    }
+    function getRatio(elem) {
+      try {
+        return elem.value.match(/коэффицент=\d\.\d{1,3}/gi).join().replace(/коэффицент=/gi, '');
+      } catch(err) {return 1;}
+    }
+
+    sum = Math.round((+getPrice(sizeBlock)) * (+getRatio(materialBlock)) + (+getPrice(optionsBlock)));
 
     if (sizeBlock.value == '' || materialBlock.value == '') {
       resultBlock.textContent = 'Пожайлуста, выберите размер и материал картины.';

@@ -13,9 +13,9 @@ const forms = () => {
     ok: 'assets/img/ok.png',
     fail: 'assets/img/fail.png',
   };
-  // ./assets/question.php
+
   const path = {
-    designer: './assets/server.php',
+    designer: 'https://echo.htmlacademy.ru',
     question: 'https://echo.htmlacademy.ru',
   };
 
@@ -63,8 +63,6 @@ const forms = () => {
       const formData = new FormData(item);
       let api;
       item.closest('.popup-design') || item.classList.contains('calc-form') ? api = path.designer : api = path.question;
-      console.log(api);
-
 
       postData(api, formData)
         .then(result => {

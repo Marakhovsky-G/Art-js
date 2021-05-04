@@ -2684,6 +2684,36 @@ $({ target: 'Array', proto: true, forced: FORCED }, {
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/es.array.join.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/core-js/modules/es.array.join.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var $ = __webpack_require__(/*! ../internals/export */ "./node_modules/core-js/internals/export.js");
+var IndexedObject = __webpack_require__(/*! ../internals/indexed-object */ "./node_modules/core-js/internals/indexed-object.js");
+var toIndexedObject = __webpack_require__(/*! ../internals/to-indexed-object */ "./node_modules/core-js/internals/to-indexed-object.js");
+var sloppyArrayMethod = __webpack_require__(/*! ../internals/sloppy-array-method */ "./node_modules/core-js/internals/sloppy-array-method.js");
+
+var nativeJoin = [].join;
+
+var ES3_STRINGS = IndexedObject != Object;
+var SLOPPY_METHOD = sloppyArrayMethod('join', ',');
+
+// `Array.prototype.join` method
+// https://tc39.github.io/ecma262/#sec-array.prototype.join
+$({ target: 'Array', proto: true, forced: ES3_STRINGS || SLOPPY_METHOD }, {
+  join: function join(separator) {
+    return nativeJoin.call(toIndexedObject(this), separator === undefined ? ',' : separator);
+  }
+});
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/modules/es.array.slice.js":
 /*!********************************************************!*\
   !*** ./node_modules/core-js/modules/es.array.slice.js ***!
@@ -4522,6 +4552,16 @@ var burger = function burger(menuSelector, burgerSelector) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.join */ "./node_modules/core-js/modules/es.array.join.js");
+/* harmony import */ var core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_join__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.string.match */ "./node_modules/core-js/modules/es.string.match.js");
+/* harmony import */ var core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_match__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.string.replace */ "./node_modules/core-js/modules/es.string.replace.js");
+/* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_2__);
+
+
+
+
 var calc = function calc(size, material, options, promocode, result) {
   var sizeBlock = document.querySelector(size),
       materialBlock = document.querySelector(material),
@@ -4531,7 +4571,23 @@ var calc = function calc(size, material, options, promocode, result) {
   var sum = 0;
 
   var calcFunc = function calcFunc() {
-    sum = Math.round(+sizeBlock.value * +materialBlock.value + +optionsBlock.value);
+    function getPrice(elem) {
+      try {
+        return elem.value.match(/цена=\d{1,5}/gi).join().replace(/\D/gi, '');
+      } catch (err) {
+        return 0;
+      }
+    }
+
+    function getRatio(elem) {
+      try {
+        return elem.value.match(/коэффицент=\d\.\d{1,3}/gi).join().replace(/коэффицент=/gi, '');
+      } catch (err) {
+        return 1;
+      }
+    }
+
+    sum = Math.round(+getPrice(sizeBlock) * +getRatio(materialBlock) + +getPrice(optionsBlock));
 
     if (sizeBlock.value == '' || materialBlock.value == '') {
       resultBlock.textContent = 'Пожайлуста, выберите размер и материал картины.';
@@ -4812,10 +4868,9 @@ var forms = function forms() {
     spinner: 'assets/img/spinner.gif',
     ok: 'assets/img/ok.png',
     fail: 'assets/img/fail.png'
-  }; // ./assets/question.php
-
+  };
   var path = {
-    designer: './assets/server.php',
+    designer: 'https://echo.htmlacademy.ru',
     question: 'https://echo.htmlacademy.ru'
   };
 
@@ -4857,7 +4912,6 @@ var forms = function forms() {
       var formData = new FormData(item);
       var api;
       item.closest('.popup-design') || item.classList.contains('calc-form') ? api = path.designer : api = path.question;
-      console.log(api);
       Object(_services_requests__WEBPACK_IMPORTED_MODULE_6__["postData"])(api, formData).then(function (result) {
         console.log(result);
         statusImg.setAttribute('src', message.ok);
