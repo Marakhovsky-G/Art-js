@@ -4536,9 +4536,9 @@ var calc = function calc(size, material, options, promocode, result) {
     if (sizeBlock.value == '' || materialBlock.value == '') {
       resultBlock.textContent = 'Пожайлуста, выберите размер и материал картины.';
     } else if (promocodeBlock.value === 'IWANTPOPART') {
-      resultBlock.textContent = Math.round(sum * 0.7);
+      resultBlock.textContent = "".concat(Math.round(sum * 0.7), " \u0440\u0443\u0431.");
     } else {
-      resultBlock.textContent = sum;
+      resultBlock.textContent = "".concat(sum, " \u0440\u0443\u0431.");
     }
   };
 

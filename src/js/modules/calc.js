@@ -13,9 +13,9 @@ const calc = (size, material, options, promocode, result) => {
     if (sizeBlock.value == '' || materialBlock.value == '') {
       resultBlock.textContent = 'Пожайлуста, выберите размер и материал картины.';
     } else if (promocodeBlock.value === 'IWANTPOPART') {
-      resultBlock.textContent = Math.round(sum * 0.7);
+      resultBlock.textContent = `${Math.round(sum * 0.7)} руб.`;
     } else {
-      resultBlock.textContent = sum;
+      resultBlock.textContent = `${sum} руб.`;
     }
   };
 
